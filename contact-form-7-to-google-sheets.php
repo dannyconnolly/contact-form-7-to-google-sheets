@@ -16,3 +16,30 @@
 if (!defined('WPINC')) {
     die;
 }
+
+
+define('CFGS_URL', WP_PLUGIN_URL . "/" . dirname(plugin_basename(__FILE__)));
+define('CFGS_PATH', WP_PLUGIN_DIR . "/" . dirname(plugin_basename(__FILE__)));
+
+define("CFGS_LOG_FILE", "cfgs.log");
+
+/*
+ * Requires libraries for Google Spreadsheet and Google Client
+ */
+require CFGS_PATH . '/vendor/autoload.php';
+
+if (!class_exists('CF7GS_Google_Spreadsheet')) {
+    require_once( CFGS_PATH . '/inc/class.cf7gs-google-spreadsheet.php' );
+}
+
+if (!class_exists('CFGS')) {
+    require_once( CFGS_PATH . '/inc/class.contact-form-7-to-google-sheets.php' );
+}
+
+function dump_res($d) {
+    echo '<pre>';
+    var_dump($d);
+    echo '</pre>';
+}
+
+new CFGS();

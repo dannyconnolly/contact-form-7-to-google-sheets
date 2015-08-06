@@ -1,6 +1,6 @@
 === Contact Form 7 to Google Sheets ===
-Contributors: 
-Tags: 
+Contributors: Dann Connolly
+Tags: Contact Form 7, Google Drive, Google Spreadsheet
 Donate link: 
 Requires at least: 4.0
 Tested up to: 4.2
@@ -8,11 +8,10 @@ Stable tag: 2.3.13
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Save posted data to Google Sheets
 
 == Description ==
 
-Save posted data to Google Sheets
+Save data submitted by Contact Form 7 forms to a Google Spreadsheet
 
 = Features =
 
@@ -30,7 +29,7 @@ Save posted data to Google Sheets
 
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To do an automatic install of Contact Form 7 to Google Sheets, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
-In the search field type “Contact Form 7 to Google Sheets” and click Search Plugins. Once you’ve found our eCommerce plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
+In the search field type “Contact Form 7 to Google Sheets” and click Search Plugins. 
 
 = Manual installation =
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2013 Asim Liaquat
  *
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace Google\Spreadsheet;
 
 /**
@@ -23,8 +25,8 @@ namespace Google\Spreadsheet;
  * @subpackage Spreadsheet
  * @author     Asim Liaquat <asimlqt22@gmail.com>
  */
-class DefaultServiceRequest implements ServiceRequestInterface
-{
+class DefaultServiceRequest implements ServiceRequestInterface {
+
     /**
      * Request object
      * 
@@ -66,8 +68,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * @param string $accessToken
      * @param string $tokenType
      */
-    public function __construct($accessToken, $tokenType = 'OAuth')
-    {
+    public function __construct($accessToken, $tokenType = 'OAuth') {
         $this->accessToken = $accessToken;
         $this->tokenType = $tokenType;
     }
@@ -77,11 +78,10 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return array
      */
-    public function getHeaders()
-    {
+    public function getHeaders() {
         return $this->headers;
     }
-    
+
     /**
      * Set optional request headers. 
      * 
@@ -89,8 +89,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      *
      * @return Google\Spreadsheet\DefaultServiceRequest
      */
-    public function setHeaders(array $headers)
-    {
+    public function setHeaders(array $headers) {
         $this->headers = $headers;
         return $this;
     }
@@ -100,11 +99,10 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return string
      */
-    public function getUserAgent()
-    {
+    public function getUserAgent() {
         return $this->userAgent;
     }
-    
+
     /**
      * Set the user agent. It is a good ides to leave this as is.
      * 
@@ -112,8 +110,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      *
      * @return Google\Spreadsheet\DefaultServiceRequest
      */
-    public function setUserAgent($userAgent)
-    {
+    public function setUserAgent($userAgent) {
         $this->userAgent = $userAgent;
         return $this;
     }
@@ -125,8 +122,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return string
      */
-    public function get($url)
-    {
+    public function get($url) {
         $ch = $this->initRequest($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         return $this->execute($ch);
@@ -140,8 +136,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return string
      */
-    public function post($url, $postData)
-    {   
+    public function post($url, $postData) {
         $headers = array(
             'Content-Type: application/atom+xml',
             'Content-Length: ' . strlen($postData),
@@ -160,8 +155,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return string
      */
-    public function put($url, $postData)
-    {
+    public function put($url, $postData) {
         $headers = array(
             'Content-Type: application/atom+xml',
             'Content-Length: ' . strlen($postData),
@@ -179,8 +173,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return string
      */
-    public function delete($url)
-    {
+    public function delete($url) {
         $ch = $this->initRequest($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         return $this->execute($ch);
@@ -194,17 +187,16 @@ class DefaultServiceRequest implements ServiceRequestInterface
      * 
      * @return resource
      */
-    protected function initRequest($url, $requestHeaders = array())
-    {
-        $curlParams = array (
+    protected function initRequest($url, $requestHeaders = array()) {
+        $curlParams = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_FAILONERROR => false,
-            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_VERBOSE => false,
         );
 
-        if(substr($url, 0, 4) !== 'http') {
+        if (substr($url, 0, 4) !== 'http') {
             $url = $this->serviceUrl . $url;
         }
 
@@ -223,7 +215,7 @@ class DefaultServiceRequest implements ServiceRequestInterface
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_USERAGENT, $this->getUserAgent());
-        return $ch;       
+        return $ch;
     }
 
     /**
@@ -237,12 +229,11 @@ class DefaultServiceRequest implements ServiceRequestInterface
      *                                       
      * @throws \Google\Spreadsheet\UnauthorizedException
      */
-    protected function execute($ch)
-    {
+    protected function execute($ch) {
         $ret = curl_exec($ch);
 
         $info = curl_getinfo($ch);
-        $httpCode = (int)$info['http_code'];
+        $httpCode = (int) $info['http_code'];
 
         if ($httpCode > 299) {
             switch ($httpCode) {
